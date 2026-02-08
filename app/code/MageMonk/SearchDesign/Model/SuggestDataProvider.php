@@ -6,9 +6,10 @@ use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
-use Magento\Checkout\Helper\Cart as CartHelper;
+use Magento\Framework\App\ActionInterface;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\Url\EncoderInterface;
 use Magento\Search\Helper\Data as SearchHelper;
 use Magento\Search\Model\AutocompleteInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -35,9 +36,6 @@ class SuggestDataProvider
     /** @var ImageHelper */
     private $imageHelper;
 
-    /** @var CartHelper */
-    private $cartHelper;
-
     /** @var SearchHelper */
     private $searchHelper;
 
@@ -53,30 +51,33 @@ class SuggestDataProvider
     /** @var Render */
     private $priceRender;
 
+    /** @var EncoderInterface */
+    private $urlEncoder;
+
     public function __construct(
         AutocompleteInterface $autocomplete,
         CategoryCollectionFactory $categoryCollectionFactory,
         ProductCollectionFactory $productCollectionFactory,
         Visibility $productVisibility,
         ImageHelper $imageHelper,
-        CartHelper $cartHelper,
         SearchHelper $searchHelper,
         UrlInterface $urlBuilder,
         StoreManagerInterface $storeManager,
         FormKey $formKey,
-        Render $priceRender
+        Render $priceRender,
+        EncoderInterface $urlEncoder
     ) {
         $this->autocomplete = $autocomplete;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->productVisibility = $productVisibility;
         $this->imageHelper = $imageHelper;
-        $this->cartHelper = $cartHelper;
         $this->searchHelper = $searchHelper;
         $this->urlBuilder = $urlBuilder;
         $this->storeManager = $storeManager;
         $this->formKey = $formKey;
         $this->priceRender = $priceRender;
+        $this->urlEncoder = $urlEncoder;
     }
 
     public function getData(string $query): array
@@ -187,7 +188,7 @@ class SuggestDataProvider
                 'image' => (string) $this->imageHelper
                     ->init($product, 'product_page_image_small')
                     ->getUrl(),
-                'add_to_cart_url' => (string) $this->cartHelper->getAddUrl($product),
+                'add_to_cart_url' => $this->getAddToCartUrl($product),
                 'can_add_to_cart' => $canAddToCart,
                 'price_html' => $this->getPriceHtml($product)
             ];
@@ -219,6 +220,17 @@ class SuggestDataProvider
         return $this->urlBuilder->getUrl(
             'catalogsearch/result',
             [$this->searchHelper->getQueryParamName() => $query]
+        );
+    }
+
+    private function getAddToCartUrl(Product $product): string
+    {
+        return $this->urlBuilder->getUrl(
+            'checkout/cart/add',
+            [
+                'product' => (int) $product->getId(),
+                ActionInterface::PARAM_NAME_URL_ENCODED => $this->urlEncoder->encode($product->getProductUrl())
+            ]
         );
     }
 }
