@@ -20,10 +20,10 @@
 ## Package Readiness
 - [x] `composer.json` present with module metadata/autoload
 - [x] `README.md` with install/config usage
-- [ ] Release notes/changelog prepared
+- [x] Release notes/changelog prepared
 - [ ] Marketplace listing assets prepared (icons, screenshots, docs)
 
 ## Recommended (Strongly)
-- [ ] Unit tests for provider/controller logic
-- [ ] MFTF smoke flow for search dropdown + add to cart
+- [x] Unit tests for provider/controller logic
+- [x] MFTF smoke flow for search dropdown + add to cart
 - [ ] Performance check on larger catalog

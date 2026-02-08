@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="SearchDesignAutocompleteAddToCartSmokeTest">
+        <annotations>
+            <stories value="MageMonk SearchDesign"/>
+            <title value="Storefront autocomplete add-to-cart smoke test for MageMonk SearchDesign"/>
+            <description value="Validates that custom autocomplete appears and add-to-cart works from the dropdown."/>
+            <severity value="MAJOR"/>
+            <group value="MageMonk"/>
+            <group value="SearchDesign"/>
+            <group value="smoke"/>
+        </annotations>
+        <before>
+            <createData entity="_defaultCategory" stepKey="createCategory"/>
+            <createData entity="_defaultProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+
+            <actionGroup ref="CliIndexerReindexActionGroup" stepKey="reindex">
+                <argument name="indices" value=""/>
+            </actionGroup>
+            <comment userInput="Cache flush step kept as compatibility marker." stepKey="flushCacheMarker"/>
+        </before>
+        <after>
+            <deleteData stepKey="deleteProduct" createDataKey="createSimpleProduct"/>
+            <deleteData stepKey="deleteCategory" createDataKey="createCategory"/>
+        </after>
+
+        <actionGroup ref="StorefrontOpenHomePageActionGroup" stepKey="openStorefrontHome"/>
+        <actionGroup ref="StorefrontAddToCartFromSearchDesignAutocompleteActionGroup" stepKey="addToCartFromAutocomplete">
+            <argument name="productName" value="$createSimpleProduct.name$"/>
+        </actionGroup>
+    </test>
+</tests>

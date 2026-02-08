@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontAddToCartFromSearchDesignAutocompleteActionGroup">
+        <annotations>
+            <description>Add first product from MageMonk search-design autocomplete dropdown to cart and verify success message.</description>
+        </annotations>
+        <arguments>
+            <argument name="productName" type="string"/>
+        </arguments>
+
+        <click selector="#search_mini_form #search" stepKey="focusSearchInput"/>
+        <fillField selector="#search_mini_form #search" userInput="{{productName}}" stepKey="fillSearchInput"/>
+        <waitForElementVisible selector="#search_autocomplete .search-design-dropdown" time="30" stepKey="waitForDropdown"/>
+        <waitForElementVisible selector="#search_autocomplete .search-product:first-child .action.tocart" time="30" stepKey="waitForAddToCartButton"/>
+        <click selector="#search_autocomplete .search-product:first-child .action.tocart" stepKey="clickAddToCartFromDropdown"/>
+        <waitForElementVisible selector=".page.messages .message-success" time="30" stepKey="waitForSuccessMessage"/>
+        <see selector=".page.messages .message-success" userInput="You added {{productName}} to your shopping cart." stepKey="verifySuccessMessage"/>
+    </actionGroup>
+</actionGroups>
