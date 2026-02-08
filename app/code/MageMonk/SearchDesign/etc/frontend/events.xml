@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="layout_load_before">
-        <observer name="vendor_searchdesign_add_layout_handle" instance="Vendor\SearchDesign\Observer\AddLayoutHandle" />
+        <observer name="magemonk_searchdesign_add_layout_handle" instance="MageMonk\SearchDesign\Observer\AddLayoutHandle" />
     </event>
 </config>

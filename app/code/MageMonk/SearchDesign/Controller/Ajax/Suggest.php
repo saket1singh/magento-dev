@@ -1,12 +1,12 @@
 <?php
-namespace Vendor\SearchDesign\Controller\Ajax;
+namespace MageMonk\SearchDesign\Controller\Ajax;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
-use Vendor\SearchDesign\Model\Config;
-use Vendor\SearchDesign\Model\SuggestDataProvider;
+use MageMonk\SearchDesign\Model\Config;
+use MageMonk\SearchDesign\Model\SuggestDataProvider;
 
 class Suggest extends Action implements HttpGetActionInterface
 {

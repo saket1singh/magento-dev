@@ -6,7 +6,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Vendor_SearchDesign::config" title="Search Design Configuration" sortOrder="90" />
+                            <resource id="MageMonk_SearchDesign::config" title="Search Design Configuration" sortOrder="90" />
                         </resource>
                     </resource>
                 </resource>

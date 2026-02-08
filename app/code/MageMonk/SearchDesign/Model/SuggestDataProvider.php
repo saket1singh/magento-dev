@@ -1,5 +1,5 @@
 <?php
-namespace Vendor\SearchDesign\Model;
+namespace MageMonk\SearchDesign\Model;
 
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;

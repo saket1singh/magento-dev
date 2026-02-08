@@ -1,10 +1,10 @@
 <?php
-namespace Vendor\SearchDesign\ViewModel;
+namespace MageMonk\SearchDesign\ViewModel;
 
 use Magento\Framework\UrlInterface;
 use Magento\Search\Helper\Data as SearchHelper;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Vendor\SearchDesign\Model\Config;
+use MageMonk\SearchDesign\Model\Config;
 
 class SearchConfig implements ArgumentInterface
 {

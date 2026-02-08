@@ -7,7 +7,7 @@ $configProvider = $block->getData('configProvider');
 $additionalSearchFormData = $block->getData('additionalSearchFormData');
 /** @var $helper \Magento\Search\Helper\Data */
 $helper = $configProvider->getSearchHelperData();
-/** @var $searchConfig \Vendor\SearchDesign\ViewModel\SearchConfig */
+/** @var $searchConfig \MageMonk\SearchDesign\ViewModel\SearchConfig */
 $searchConfig = $block->getData('searchDesignConfig');
 $quickSearchUrl = $escaper->escapeUrl($searchConfig->getSuggestUrl());
 ?>
@@ -29,7 +29,7 @@ $quickSearchUrl = $escaper->escapeUrl($searchConfig->getSuggestUrl());
                 <div class="control">
                     <input id="search"
                            data-mage-init='{
-                            "Vendor_SearchDesign/js/form-mini": {
+                            "MageMonk_SearchDesign/js/form-mini": {
                                 "formSelector": "#search_mini_form",
                                 "url": "<?= /* @noEscape */ $quickSearchUrl ?>",
                                 "destinationSelector": "#search_autocomplete",

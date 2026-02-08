@@ -3,6 +3,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Vendor_SearchDesign',
+    'MageMonk_SearchDesign',
     __DIR__
 );

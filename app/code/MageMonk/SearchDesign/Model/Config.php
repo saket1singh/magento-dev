@@ -1,5 +1,5 @@
 <?php
-namespace Vendor\SearchDesign\Model;
+namespace MageMonk\SearchDesign\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;

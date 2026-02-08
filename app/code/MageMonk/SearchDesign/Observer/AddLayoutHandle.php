@@ -1,9 +1,9 @@
 <?php
-namespace Vendor\SearchDesign\Observer;
+namespace MageMonk\SearchDesign\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Vendor\SearchDesign\Model\Config;
+use MageMonk\SearchDesign\Model\Config;
 
 class AddLayoutHandle implements ObserverInterface
 {
