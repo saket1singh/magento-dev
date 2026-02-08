@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Vendor_SearchDesign::css/search.css"/>
+    </head>
+    <body>
+        <referenceBlock name="top.search">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Vendor_SearchDesign::form.mini.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="searchDesignConfig" xsi:type="object">Vendor\SearchDesign\ViewModel\SearchConfig</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
