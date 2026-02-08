@@ -47,7 +47,11 @@ $quickSearchUrl = $escaper->escapeUrl($searchConfig->getSuggestUrl());
                            aria-autocomplete="both"
                            autocomplete="off"
                            aria-expanded="false"/>
-                    <button type="button" class="search-clear" aria-label="<?= $escaper->escapeHtmlAttr(__('Clear search')) ?>"></button>
+                    <button
+                        type="button"
+                        class="search-clear"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Clear search')) ?>"
+                    ></button>
                     <div id="search_autocomplete" class="search-autocomplete search-design-autocomplete"></div>
                     <?= $block->getChildHtml() ?>
                 </div>

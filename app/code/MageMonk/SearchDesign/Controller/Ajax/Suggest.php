@@ -18,6 +18,13 @@ class Suggest extends Action implements HttpGetActionInterface
     /** @var Config */
     private $config;
 
+    /**
+     * Build suggest controller.
+     *
+     * @param Context $context
+     * @param Config $config
+     * @param SuggestDataProvider $dataProvider
+     */
     public function __construct(
         Context $context,
         Config $config,
@@ -28,6 +35,11 @@ class Suggest extends Action implements HttpGetActionInterface
         $this->dataProvider = $dataProvider;
     }
 
+    /**
+     * Return JSON suggestion payload.
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         if (!$this->config->isEnabled()) {

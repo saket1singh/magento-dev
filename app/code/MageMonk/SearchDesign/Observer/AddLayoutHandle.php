@@ -10,11 +10,23 @@ class AddLayoutHandle implements ObserverInterface
     /** @var Config */
     private $config;
 
+    /**
+     * Add conditional layout handle observer.
+     *
+     * @param Config $config
+     */
     public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * Add the module layout handle when feature is enabled.
+     *
+     * @param Observer $observer
+     *
+     * @return void
+     */
     public function execute(Observer $observer): void
     {
         if (!$this->config->isEnabled()) {

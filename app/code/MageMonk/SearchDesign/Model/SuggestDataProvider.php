@@ -54,6 +54,21 @@ class SuggestDataProvider
     /** @var EncoderInterface */
     private $urlEncoder;
 
+    /**
+     * Build suggestion data provider.
+     *
+     * @param AutocompleteInterface $autocomplete
+     * @param CategoryCollectionFactory $categoryCollectionFactory
+     * @param ProductCollectionFactory $fulltextCollectionFactory
+     * @param Visibility $productVisibility
+     * @param ImageHelper $imageHelper
+     * @param SearchHelper $searchHelper
+     * @param UrlInterface $urlBuilder
+     * @param StoreManagerInterface $storeManager
+     * @param FormKey $formKey
+     * @param Render $priceRender
+     * @param EncoderInterface $urlEncoder
+     */
     public function __construct(
         AutocompleteInterface $autocomplete,
         CategoryCollectionFactory $categoryCollectionFactory,
@@ -80,6 +95,13 @@ class SuggestDataProvider
         $this->urlEncoder = $urlEncoder;
     }
 
+    /**
+     * Build payload for autocomplete endpoint.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
     public function getData(string $query): array
     {
         $query = trim($query);
@@ -95,6 +117,13 @@ class SuggestDataProvider
         ];
     }
 
+    /**
+     * Collect suggested search terms.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
     private function getSuggestions(string $query): array
     {
         $items = [];
@@ -128,6 +157,13 @@ class SuggestDataProvider
         return $items;
     }
 
+    /**
+     * Collect matching categories.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
     private function getCategories(string $query): array
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
@@ -162,6 +198,13 @@ class SuggestDataProvider
         return $items;
     }
 
+    /**
+     * Collect matching products from fulltext collection.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
     private function getProducts(string $query): array
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
@@ -194,6 +237,13 @@ class SuggestDataProvider
         return $items;
     }
 
+    /**
+     * Render product price HTML snippet.
+     *
+     * @param Product $product
+     *
+     * @return string
+     */
     private function getPriceHtml(Product $product): string
     {
         try {
@@ -212,6 +262,13 @@ class SuggestDataProvider
         }
     }
 
+    /**
+     * Build storefront search result URL.
+     *
+     * @param string $query
+     *
+     * @return string
+     */
     private function getSearchUrl(string $query): string
     {
         return $this->urlBuilder->getUrl(
@@ -220,6 +277,13 @@ class SuggestDataProvider
         );
     }
 
+    /**
+     * Build add-to-cart URL with safe return target.
+     *
+     * @param Product $product
+     *
+     * @return string
+     */
     private function getAddToCartUrl(Product $product): string
     {
         return $this->urlBuilder->getUrl(

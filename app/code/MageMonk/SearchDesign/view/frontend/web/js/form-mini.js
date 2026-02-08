@@ -106,19 +106,19 @@ define([
                     return;
                 }
 
-                postForm = $('<form/>', {
+                postForm = $('<form>', {
                     method: 'post',
                     action: actionUrl,
                     style: 'display:none;'
                 });
 
-                postForm.append($('<input/>', {
+                postForm.append($('<input>', {
                     type: 'hidden',
                     name: 'form_key',
                     value: formKey
                 }));
 
-                postForm.append($('<input/>', {
+                postForm.append($('<input>', {
                     type: 'hidden',
                     name: 'qty',
                     value: qty
@@ -307,10 +307,10 @@ define([
                     if (product.can_add_to_cart) {
                         actionHtml =
                             '<div class="search-product-cart" data-action="' + _.escape(product.add_to_cart_url) + '">' +
-                                '<input type="hidden" name="form_key" value="' + _.escape(data.form_key) + '" />' +
+                                '<input type="hidden" name="form_key" value="' + _.escape(data.form_key) + '">' +
                                 '<div class="search-product-qty">' +
                                     '<label>' + $.mage.__('Qty') + '</label>' +
-                                    '<input type="number" name="qty" min="1" value="1" />' +
+                                    '<input type="number" name="qty" min="1" value="1">' +
                                 '</div>' +
                                 '<button type="button" class="action tocart">' + $.mage.__('Add to Cart') + '</button>' +
                             '</div>';

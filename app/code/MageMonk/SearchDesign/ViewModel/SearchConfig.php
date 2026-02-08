@@ -19,6 +19,13 @@ class SearchConfig implements ArgumentInterface
     /** @var Config */
     private $config;
 
+    /**
+     * Build suggestion config view model.
+     *
+     * @param UrlInterface $urlBuilder
+     * @param SearchHelper $searchHelper
+     * @param Config $config
+     */
     public function __construct(
         UrlInterface $urlBuilder,
         SearchHelper $searchHelper,
@@ -29,16 +36,31 @@ class SearchConfig implements ArgumentInterface
         $this->config = $config;
     }
 
+    /**
+     * Return AJAX endpoint for suggestion data.
+     *
+     * @return string
+     */
     public function getSuggestUrl(): string
     {
         return $this->urlBuilder->getUrl('searchdesign/ajax/suggest');
     }
 
+    /**
+     * Return search query param key.
+     *
+     * @return string
+     */
     public function getQueryParamName(): string
     {
         return $this->searchHelper->getQueryParamName();
     }
 
+    /**
+     * Return whether custom search design is enabled.
+     *
+     * @return bool
+     */
     public function isEnabled(): bool
     {
         return $this->config->isEnabled();
