@@ -28,7 +28,7 @@ class SuggestDataProvider
     private $categoryCollectionFactory;
 
     /** @var ProductCollectionFactory */
-    private $productCollectionFactory;
+    private $fulltextCollectionFactory;
 
     /** @var Visibility */
     private $productVisibility;
@@ -57,7 +57,7 @@ class SuggestDataProvider
     public function __construct(
         AutocompleteInterface $autocomplete,
         CategoryCollectionFactory $categoryCollectionFactory,
-        ProductCollectionFactory $productCollectionFactory,
+        ProductCollectionFactory $fulltextCollectionFactory,
         Visibility $productVisibility,
         ImageHelper $imageHelper,
         SearchHelper $searchHelper,
@@ -69,7 +69,7 @@ class SuggestDataProvider
     ) {
         $this->autocomplete = $autocomplete;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
-        $this->productCollectionFactory = $productCollectionFactory;
+        $this->fulltextCollectionFactory = $fulltextCollectionFactory;
         $this->productVisibility = $productVisibility;
         $this->imageHelper = $imageHelper;
         $this->searchHelper = $searchHelper;
@@ -165,15 +165,12 @@ class SuggestDataProvider
     private function getProducts(string $query): array
     {
         $storeId = (int) $this->storeManager->getStore()->getId();
-        $collection = $this->productCollectionFactory->create();
+        $collection = $this->fulltextCollectionFactory->create();
         $collection->addStoreFilter($storeId)
             ->addAttributeToSelect(['name', 'sku', 'small_image'])
+            ->addSearchFilter($query)
             ->addAttributeToFilter('status', Status::STATUS_ENABLED)
             ->setVisibility($this->productVisibility->getVisibleInSearchIds())
-            ->addAttributeToFilter([
-                ['attribute' => 'name', 'like' => '%' . $query . '%'],
-                ['attribute' => 'sku', 'like' => '%' . $query . '%']
-            ])
             ->setPageSize(self::PRODUCT_LIMIT)
             ->setCurPage(1);
 
